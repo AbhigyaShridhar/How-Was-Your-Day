@@ -81,7 +81,7 @@ class Messages(LoginRequiredMixin, View):
         results = []
 
         for m in messages:
-            result = [m.text, naturaltime(message.created_at)]
+            result = [m.text, m.owner.username, naturaltime(m.created_at)]
             results.append(result)
 
         return JsonResponse(results, safe=False)

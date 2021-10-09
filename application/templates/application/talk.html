@@ -1,12 +1,22 @@
-{% extends 'layout.html' %}
-
 {% load static %}
 
-{% block title %}
-  Chat
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{% block body %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Add Favicon here -->
+
+    <title>
+      Talk
+     </title>
+  </head>
+  <body>
+<br><br><br>
   <h1>Chat</h1>
   <form method="post">
     {% csrf_token %}
@@ -34,14 +44,14 @@
         setTimeout('updateMsg()', 4000);
       });
     }
-
-
     $(document).ready(function () {
       $.ajaxSetup({ cache: false });
-      updateMsg();
+      setTimeout('updateMsg()', 2000);
     });
 
   </script>
 
 
-{% endblock %}
+</body>
+
+</html>
