@@ -10,7 +10,9 @@ urlpatterns = [
     path('accounts/login', views.Login.as_view(), name="login"),
     path('accounts/logout', views.logout_view, name="logout"),
     path('about', views.about, name="about"),
-    #chat views
-    path('talk', views.Talk.as_view(), name="talk"),
-    path('messages', views.Messages.as_view(), name="messages"),
+
+    path('connect', views.Connect.as_view(), name="connect"),
+    path('room/<str:name>', views.ChatRoom.as_view(), name="room"),
+
+    path('messages/<str:name>', views.Messages.as_view(), name="messages"),
 ]

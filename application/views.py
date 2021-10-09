@@ -9,7 +9,7 @@ from django.contrib.humanize.templatetags.humanize import naturaltime
 
 from .forms import RegistrationForm
 
-from .models import User, Message
+from .models import User, Message, Theme, Room
 
 # Create your views here.
 def index(request):
@@ -63,21 +63,43 @@ class Login(View):
 def about(request):
     return render(request, "application/about.html")
 
-class Talk(LoginRequiredMixin, View):
-    template = "application/talk.html"
-    success_url = 'application:talk'
+class Connect(LoginRequiredMixin, View):
+    template = "application/connect.html"
 
     def get(self, request):
-        return render(request, self.template)
+        try:
+            rooms = Room.objects.filter(full=False)
+        except Room.DoesNotExist:
+            return render(request, self.template, {
+                'message': "No active chat rooms for now",
+            })
+        return render(request, self.template, {
+            'rooms': rooms,
+        })
 
-    def post(self, request):
-        message = Message(text=request.POST['message'], owner=request.user)
+class ChatRoom(LoginRequiredMixin, View):
+    template = "application/room.html"
+    success_url = 'application:room'
+
+    def get(self, request, name):
+        theme = Theme.objects.get(name=name)
+        room = Room.objects.get(theme=theme)
+        return render(request, self.template, {
+            'room': room,
+        })
+
+    def post(self, request, name):
+        theme = Theme.objects.get(name=name)
+        room = Room.objects.get(theme=theme)
+        message = Message(text=request.POST['message'], owner=request.user, room=room)
         message.save()
-        return redirect(reverse(self.success_url))
+        return HttpResponseRedirect(reverse(self.success_url, kwargs={'name':name, }))
 
 class Messages(LoginRequiredMixin, View):
-    def get(self, request):
-        messages = Message.objects.all().order_by('-created_at')[:10]
+    def get(self, request, name):
+        theme = Theme.objects.get(name=name)
+        room = Room.objects.get(theme=theme)
+        messages = Message.objects.filter(room=room).order_by('-created_at')[:10]
         results = []
 
         for m in messages:
