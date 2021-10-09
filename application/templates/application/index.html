@@ -1,0 +1,223 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block style %}
+<!-- Linking My Custom CSS File -->
+<link href="{% static 'css/styles.css' %}" rel="stylesheet" type="text/css" />
+
+<!-- Bootstrap CSS and Material ICONS CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+  How was your Day 🤔
+{% endblock %}
+
+{% block body %}
+<!-- Body -->
+<div class="container-fluid bg-light mb-4">
+    <div class="container">
+        <div class="row flex-lg-row-reverse flex-md-row-reverse justify-content-end align-items-center py-5">
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pb-5 py-3">
+                <img src="{% static 'img/banner.gif' %}" class="mx-auto shadow-lg rounded img-fluid d-none d-sm-none d-md-3-none d-lg-block d-xl-block" alt="Image" />
+            </div>
+
+            <div class="col-lg-8 col-md-12 col-sm-12 d-col-lg-8 d-col-md-6 d-col-sm-12 p-3">
+                <h1 class="display-4 fw-bold lh-1 mb-3">Audio Project</P></h1>
+                <p class="lead">
+                    Get Insights about an Audio Clip submitted by the user, Connect users who’re talking
+                    about the same things and Open a chat box for them to converse.
+                </p>
+                <div class="d-md-flex justify-md-content-center">
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                        <a class="btn btn-primary btn-lg me-md-2 mb-3" href="#features" role="button">
+                            View All Features
+                        </a>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                        <a class="btn btn-secondary btn-lg me-md-2 mb-3" href="" role="button">
+                            Suggest any Feature :)
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features -->
+<div class="container px-4 py-5" id="features">
+    <h1 class="display-6 fw-bold lh-1 mb-2 text-center">We Help People by Providing various Features</h1>
+    <hr class="solid" />
+    <div class="row row-cols-1 row-cols-lg-2 row-cols-md-2 py-5">
+        <div class="col p-2">
+            <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('./images/upload-dark.png'); background-size: cover; background-repeat: no-repeat;">
+                <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                    <h2 class="text-center mt-5 mb-4 display-6 lh-1 fw-bold">Upload Audio and Get Insights</h2>
+                    <a class="btn btn-warning btn-lg px-4 mt-2 mb-5" href="./upload-page.html" target="_parent" role="button">
+                        Click here to Try
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col p-2">
+            <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('./images/record-dark.png'); background-size: cover; background-repeat: no-repeat;">
+                <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                    <h2 class="text-center mt-5 mb-4 display-6 lh-1 fw-bold">Record Audio and Get Insights</h2>
+                    <a class="btn btn-warning btn-lg px-4 mt-2 mb-5" href="./record-page.html" target="_parent" role="button">
+                        Click here to Try
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col p-2">
+            <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('./images/connect-dark.png'); background-size: cover; background-repeat: no-repeat;">
+                <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                    <h2 class="text-center mt-5 mb-4 display-6 lh-1 fw-bold">Connect with People</h2>
+                    <a class="btn btn-warning btn-lg px-4 mt-2 mb-5" href="" target="_parent" role="button">
+                        Click here to Try
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col p-2">
+            <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('./images/chat-dark.png'); background-size: cover; background-repeat: no-repeat;">
+                <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                    <h2 class="text-center mt-5 mb-4 display-6 lh-1 fw-bold">Chat with Like - minded</h2>
+                    <a class="btn btn-warning btn-lg px-4 mt-2 mb-5" href="" target="_parent" role="button">
+                        Click here to Try
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Section 1 for Upload Feature -->
+<div class="container-fluid bg-light p-5">
+    <div class="container">
+        <div class="row feature-section" id="feature-section">
+            <div class="col-xl-7 col-lg-7 col-md-6 col-sm-12">
+                <h2 class="mb-4 display-6 lh-1 fw-bold">
+                    Upload Audio and Get Insights
+                </h2>
+                <p class="lead">
+                    Here are the Simple steps to follow:
+                    <ul>
+                        <li>Just <mark>Upload the Audio</mark> that you want.</li>
+                        <li>Click the Get Insights Button and Proceed.</li>
+                        <li>View the Insights about your Audio.</li>
+                    </ul>
+                </p>
+                <a class="btn btn-primary btn-lg px-4 mt-2 mb-5" href="./upload-page.html" role="button">
+                    Upload Audio
+                </a>
+            </div>
+            <div class="col-xl-5 col-lg-5 col-md-6 col-sm-12">
+                <img src="{% static 'img/upload-gif.gif' %}" class="feature-section-image shadow-lg rounded img-fluid mx-auto d-none d-sm-none d-md-block d-lg-block d-xl-block" alt="Upload Audio and Get Insights Image" width="500" height="500" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Section 2 for Record Feature -->
+<div class="container-fluid p-5">
+    <div class="container">
+        <div class="row feature-section">
+            <div class="col-xl-7 col-lg-7 col-md-6 col-sm-12 order-md-2">
+                <h2 class="mb-4 display-6 lh-1 fw-bold">
+                    Record Audio and Get Insights
+                </h2>
+                <p class="lead">
+                    Here are the Simple steps to follow:
+                    <ul>
+                        <li>Just <mark>Record the Audio</mark> that you want.</li>
+                        <li>Click the Get Insights Button and Proceed.</li>
+                        <li>View the Insights about your Audio.</li>
+                    </ul>
+                </p>
+                <a class="btn btn-primary btn-lg px-4 mt-2 mb-5" href="./record-page.html" role="button">
+                    Record Audio
+                </a>
+            </div>
+            <div class="col-xl-5 col-lg-5 col-md-6 col-sm-12 order-md-1">
+                <img src="{% static 'img/record-gif.gif' %}" class="feature-section-image shadow-lg rounded img-fluid mx-auto d-none d-sm-none d-md-block d-lg-block d-xl-block" alt="Record Audio and Get Insights Image" width="500" height="500" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Section 3 for Connect Feature -->
+<div class="container-fluid bg-light p-5">
+    <div class="container">
+        <div class="row feature-section">
+            <div class="col-xl-7 col-lg-7 col-md-6 col-sm-12">
+                <h2 class="mb-4 display-6 lh-1 fw-bold">
+                    Connect with People
+                </h2>
+                <p class="lead">
+                    Here are the Simple steps to follow:
+                    <ul>
+                        <li>Just <mark>Select the Interests</mark> that match you.</li>
+                        <li>Click the <mark>Show me the Connections</mark> Button and Proceed.</li>
+                        <li>View the List of Connections.</li>
+                    </ul>
+                </p>
+                <a class="btn btn-primary btn-lg px-4 mt-2 mb-5" href="" role="button">
+                    Connect with People
+                </a>
+            </div>
+            <div class="col-xl-5 col-lg-5 col-md-6 col-sm-12">
+                <img src="{% static 'img/connect-gif.gif' %}" class="feature-section-image shadow-lg rounded img-fluid mx-auto d-none d-sm-none d-md-block d-lg-block d-xl-block" alt="Connect with People Image" width="500" height="500" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Section 4 for Chat Feature -->
+<div class="container-fluid p-5">
+    <div class="container">
+        <div class="row feature-section">
+            <div class="col-xl-7 col-lg-7 col-md-6 col-sm-12 order-2">
+                <h2 class="mb-4 display-6 lh-1 fw-bold">
+                    Chat with Like - minded
+                </h2>
+                <p class="lead">
+                    Here are the Simple steps to follow:
+                    <ul>
+                        <li>Just <mark>Select the Person</mark> that you want to chat with.</li>
+                        <li>Click the <mark>Person's Profile</mark> to view chat page.</li>
+                        <li>Chat with the like-minded.</li>
+                    </ul>
+                </p>
+                <a class="btn btn-primary btn-lg px-4 mt-2 mb-5" href="" role="button">
+                    Chat with Like - minded
+                </a>
+            </div>
+            <div class="col-xl-5 col-lg-5 col-md-6 col-sm-12 order-1">
+                <img src="{% static 'img/chat-gif.gif' %}" class="feature-section-image shadow-lg rounded img-fluid mx-auto d-none d-sm-none d-md-block d-lg-block d-xl-block" alt="Chat with Like - minded Image" width="500" height="500" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="container-fluid">
+    <div class="row pt-3 pb-3" style="background-color: #4285F4;">
+        <div class="col-4 d-flex justify-content-center">
+            <a class="btn btn-dark text-white" href="" role="button">
+                Back to Top
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

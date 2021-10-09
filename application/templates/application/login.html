@@ -1,0 +1,95 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block style %}
+<style>
+
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+      body {
+          min-height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+
+      .login-form {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 50px 40px;
+          font-family: 'Noto Sans', sans-serif;
+          font-size: 16px;
+          border-radius: 8px;
+      }
+
+      .input-field {
+          border-radius: 20px;
+          padding: 8px 20px;
+          width: 300px;
+          height: 45px;
+          border: none;
+          outline: none;
+          font-size: 16px;
+          background-color: #efeff0;
+      }
+
+      .btn-login {
+          width: 100px;
+      }
+
+      .navbar-brand {
+          padding: 10px;
+          padding-left: 20px;
+          padding-right: 20px;
+          border-radius: 10px;
+          transition: 0.3s ease;
+          background-color: black;
+          border-radius: 10px;
+          color: white;
+      }
+
+      .navbar-brand:hover {
+          border-radius: 10px;
+          transition: 0.3s ease;
+          background-color: #454141;
+          color: white;
+      }
+  </style>
+
+  <!-- Bootstrap CSS and Material ICONS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+  Login
+{% endblock %}
+
+{% block body %}
+<form class="login-form shadow-lg col-12 col-sm-12 col-md-12 col-lg-4" method="POST" required>
+  {% csrf_token %}
+      <h2 class="text-dark fw-bold">Welcome User, Sign In</h2>
+      <br/>
+      <p>
+          <input type="text" class="input-field" name="username" id="username" title="username" placeholder="Username" />
+      </p>
+      <p>
+          <input type="password" class="input-field" name="password" id="password" title="password" placeholder="Password" />
+      </p>
+      {% if error %}
+        <div class="alert alert-danger">
+            <strong> {{ error|escape }} </strong>
+        </div>
+      {% endif %}
+      <p>
+          <input type="submit" class="btn btn-primary mt-3 mb-3 btn-login" value="Login" />
+      </p>
+
+      <p class="text-muted mt-3">
+          Don't have an Account?
+          <a href="{% url 'application:register' %}" class="btn btn-link">Register Here</a>
+      </p>
+  </form>
+{% endblock %}

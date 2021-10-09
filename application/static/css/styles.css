@@ -1,0 +1,58 @@
+/* Importing Google Fonts - Roboto and Noto Sans */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+* {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.lead {
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.navbar-brand {
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 10px;
+    transition: 0.3s ease;
+    background-color: black;
+    border-radius: 10px;
+}
+
+.navbar-brand:hover {
+    border-radius: 10px;
+    transition: 0.3s ease;
+    background-color: #454141;
+}
+
+.material-icons {
+    position: relative;
+    top: 6px;
+}
+
+.nav-item {
+    transition: 0.3s ease;
+    text-align: center;
+}
+
+.nav-item:hover {
+    background-color: #DB4437;
+    border-radius: 10px;
+    transition: 0.3s ease;
+}
+
+.active-nav-item {
+    background-color: #DB4437;
+    border-radius: 10px;
+    transition: 0.3s ease;
+    text-align: center;
+}
+
+.active-nav-item:hover {
+    transition: 0.3s ease;
+}
