@@ -69,9 +69,17 @@
   Register
 {% endblock %}
 
+{% block nav %}
+{% endblock %}
+
 {% block body %}
 <form name="registrationForm" onsubmit="return validateRegsitrationForm()" class="login-form shadow-lg col-12 col-sm-12 col-md-10 col-lg-6" method="POST" required>
   {% csrf_token %}
+  <a class="navbar-brand mb-5" href="{% url 'application:index' %}">
+            <div class="logo-container">
+                How was your Day 🤔
+            </div>
+        </a>
       <h2 class="text-dark fw-bold">Fill the Details below to Register</h2>
       <br/>
       <p>

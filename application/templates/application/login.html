@@ -67,9 +67,17 @@
   Login
 {% endblock %}
 
+{% block nav %}
+{% endblock %}
+
 {% block body %}
 <form class="login-form shadow-lg col-12 col-sm-12 col-md-12 col-lg-4" method="POST" required>
   {% csrf_token %}
+  <a class="navbar-brand mb-5" href="{% url 'application:index' %}">
+            <div class="logo-container">
+                How was your Day 🤔
+            </div>
+        </a>
       <h2 class="text-dark fw-bold">Welcome User, Sign In</h2>
       <br/>
       <p>

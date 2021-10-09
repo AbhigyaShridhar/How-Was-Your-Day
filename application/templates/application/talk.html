@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block title %}
+  Chat
+{% endblock %}
+
+{% block body %}
+  <h1>Chat</h1>
+  <form method="post">
+    {% csrf_token %}
+    <input type="text" name="message" size="60"/>
+    <input type="submit" value="Chat">
+    <a href="{% url 'application:index' %}">Cancel</a>
+  </form>
+
+  <div id="chatcontent">
+    <img src="{% static 'img/loading.gif' %}" alt="Loading..."/>
+
+  </div>
+
+  <script type="text/javascript">
+    function updateMsg() {
+      console.log('Requesting JSON');
+      $.getJSON('{% url 'application:messages' %}', function(rowz){
+        console.log('JSON', rowz);
+        $('#chatcontent').empty();
+        for (var i = 0; i < rowz.length; i++)
+        {
+          arrow = rowz[i];
+          $('#chatcontent').append('<p>' + arrow[0] + '<br/>&nbsp;&nbsp;' + arrow[1] + "</p>\n");
+        }
+        setTimeout('updateMsg()', 4000);
+      });
+    }
+
+
+    $(document).ready(function () {
+      $.ajaxSetup({ cache: false });
+      updateMsg();
+    });
+
+  </script>
+
+
+{% endblock %}
