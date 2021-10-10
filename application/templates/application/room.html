@@ -92,7 +92,7 @@
   <script type="text/javascript">
     function updateMsg() {
       console.log('Requesting JSON');
-      $.getJSON('{% url 'application:messages' room.theme.name %}', function(rowz){
+      $.getJSON('{% url 'application:room_messages' room.theme.name %}', function(rowz){
         console.log('JSON', rowz);
         $('#chatcontent').empty();
         for (var i = 0; i < rowz.length; i++)

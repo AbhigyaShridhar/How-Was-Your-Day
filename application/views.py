@@ -100,7 +100,7 @@ class ChatRoom(LoginRequiredMixin, View):
 class Messages(LoginRequiredMixin, View):
     def get(self, request, pk):
         room = BinaryRoom.objects.get(id=pk)
-        messages = Message.objects.filter(room=room).order_by('-created_at')[:10]
+        messages = Message.objects.filter(binary_room=room).order_by('-created_at')[:10]
         results = []
 
         for m in messages:
@@ -136,7 +136,7 @@ class People(LoginRequiredMixin, View):
         })
 
 class BinaryChat(LoginRequiredMixin, View):
-    template = "application/room.html"
+    template = "application/chat.html"
     success_url = 'application:binary_chat'
 
     def get(self, request, pk):
@@ -156,6 +156,7 @@ class BinaryChat(LoginRequiredMixin, View):
         return render(request, self.template, {
             'binary_room': room,
             'name': u1.username,
+            'pk': pk,
         })
 
     def post(self, request, pk):
@@ -194,15 +195,26 @@ class Audio(LoginRequiredMixin, View):
 
     def post(self, request):
         form = AudioForm(request.POST, request.FILES or None)
-        instance = 0
+        try:
+            instance = Clip.objects.get(owner=request.user)
+            instance.delete()
+        except Clip.DoesNotExist:
+            instance = 0
         if form.is_valid():
             instance = form.save()
         else:
+            """
             return render(request, self.template, {
                 'form': AudioForm(),
             })
-        topic = assembly_ai("""destination of the audio file in media directory""")
-        themes = Theme.objects.all().name
+            """
+            return HttpResponse(form.errors)
+
+        topic = assembly_ai(instance.audio.path)
+        itr = Theme.objects.all()
+        themes = []
+        for i in itr:
+            themes.append(i.name)
         if not topic in themes:
             t = Theme.objects.create(name=topic)
             t.save()
@@ -215,3 +227,14 @@ class Audio(LoginRequiredMixin, View):
             room.people.add(request.user)
             room.save()
         return HttpResponseRedirect(reverse(self.success_url, kwargs={'topic':topic, }))
+
+class Record(LoginRequiredMixin, View):
+    template = "application/record.html"
+
+    def get(self, request):
+        return render(request, self.template)
+
+    """
+    def post(LoginRequiredMixin, View):
+        pass
+    """

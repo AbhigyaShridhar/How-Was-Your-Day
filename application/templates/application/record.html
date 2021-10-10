@@ -1,0 +1,107 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block title %}
+  Record Yourself
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid mb-4">
+      <div class="container">
+          <div class="row flex-lg-row-reverse flex-md-row-reverse justify-content-end align-items-center py-5">
+              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pb-5 py-3">
+                  <img src="{% static 'img/record-gif.gif' %}" class="mx-auto shadow-lg rounded img-fluid d-none d-sm-none d-md-3-none d-lg-block d-xl-block" alt="Upload Banner Image" />
+              </div>
+
+              <div class="col-lg-8 col-md-12 col-sm-12 d-col-lg-8 d-col-md-6 d-col-sm-12 p-3">
+                  <h1 class="display-4 fw-bold lh-1 mb-3">Record your Audio</P></h1>
+                  <p class="lead">
+                      Get Insights about the Recorded Audio Clip submitted by you :)
+                  </p>
+                  <br/>
+                  <p>
+                      <button id="btn-start-recording" class="btn btn-success btn-lg mt-3">
+                          Start Recording
+                      </button>
+                      &nbsp;&nbsp;
+                      <button id="btn-stop-recording" class="btn btn-danger btn-lg mt-3" disabled>
+                          Stop Recording
+                      </button>
+                  </p>
+                  <br/>
+
+                  <!-- For Recorded Audio to Play -->
+                  <audio id="recorded-audio"></audio>
+
+                  <div class="d-md-flex justify-md-content-center">
+
+                      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                          <a class="btn btn-primary btn-lg me-md-2 mt-5" href="#" role="button">
+                              Get Insights about Audio
+                          </a>
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+
+  <!-- Linking my Custom JS File -->
+
+  <script type="text/javascript">
+      // For Record Feature
+      // Grabbing the Elements
+      var startRecordingButton = document.getElementById("btn-start-recording");
+      var stopRecordingButton = document.getElementById("btn-stop-recording");
+      var recordedAudio = document.getElementById("recorded-audio");
+      var recorder;
+      var audioChunks = [];
+
+      navigator.mediaDevices.getUserMedia({ audio: true })
+      .then(stream => {handlerFunction(stream)})
+      .catch(function(error) {
+          console.log("Error Name: " + error.name);
+          console.log("Error Message: " + error.message);
+      });
+
+      function handlerFunction(stream) {
+          recorder = new MediaRecorder(stream);
+          recorder.ondataavailable = e => {
+              audioChunks.push(e.data);
+
+              if(recorder.state == "inactive") {
+                  var blob = new Blob(audioChunks, { type: "audio/mpeg-3" });
+
+                  recordedAudio.src = URL.createObjectURL(blob);
+                  recordedAudio.controls = true;
+                  recordedAudio.autoplay = true;
+                  sendData(blob);
+              }
+          }
+      }
+
+      function sendData(data) {}
+
+      startRecordingButton.onclick = e => {
+          console.log("Start Button Clicked");
+          startRecordingButton.disabled = true;
+          stopRecordingButton.disabled = false;
+          audioChunks = [];
+          recorder.start();
+      };
+
+      stopRecordingButton.onclick = e => {
+          console.log("Stop Button Clicked");
+          startRecordingButton.disabled = false;
+          stopRecordingButton.disabled = true;
+          recorder.stop();
+      };
+  </script>
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+{% endblock %}

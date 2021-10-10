@@ -19,6 +19,7 @@ urlpatterns = [
     path('rooms/messages/<str:name>', views.RoomMessages.as_view(), name="room_messages"),
 
     path('get-insights', views.Audio.as_view(), name="audio"),
+    path('record-audio', views.Record.as_view(), name="record"),
     path('get-heard/<str:topic>', views.People.as_view(), name="get_heard"),
     path('binary_chat/<int:pk>', views.BinaryChat.as_view(), name="binary_chat"),
 ]

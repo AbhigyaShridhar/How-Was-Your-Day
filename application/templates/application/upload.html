@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %}
   Upload Audio from your computer
@@ -22,19 +23,32 @@
                   <br/>
                   <p>
                       <label for="multipleFiles" class="form-label">Upload your Audio File(s)</label>
-                      <form action="index.html" method="post">
+                      <form method="POST" action="{% url 'application:audio' %}" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <input type="file" class="form-control form-control-lg" id="multipleFiles" accept="audio/*" multiple />
+                        {{ form | crispy }}
+                        <br>
+                        {% if form.errors %}
+                      {% for field in form %}
+                          {% for error in field.errors %}
+                              <div class="alert alert-danger">
+                                  <strong>{{ error|escape }}</strong>
+                              </div>
+                          {% endfor %}
+                      {% endfor %}
+                      {% for error in form.non_field_errors %}
+                          <div class="alert alert-danger">
+                              <strong>{{ error|escape }}</strong>
+                          </div>
+                      {% endfor %}
+                  {% endif %}
+                  <br>
+                        <input type="submit" class="btn btn-primary mt-3 mb-3 btn-register" value="Upload and Connect!!" />
                       </form>
                   </p>
 
                   <div class="d-md-flex justify-md-content-center">
 
-                      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                          <a class="btn btn-primary btn-lg me-md-2 mt-5" href="#" role="button">
-                              Get Insights about Audio
-                          </a>
-                      </div>
+
 
                   </div>
               </div>

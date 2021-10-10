@@ -5,10 +5,7 @@ auth_key = 'edcb2cf6f9aa4785bc314aa1db075716'
 
 
 
-headers = {
-    "authorization": auth_key,
-    "content-type": "application/json"
-}
+
 
 def read_file(filename):
    with open(filename, 'rb') as _file:
@@ -19,6 +16,10 @@ def read_file(filename):
            yield data
 
 def assembly_ai(file_address):
+    headers = {
+        "authorization": auth_key,
+        "content-type": "application/json"
+    }
     upload_response = requests.post('https://api.assemblyai.com/v2/upload', headers=headers, data=read_file(file_address))
     audio_url = upload_response.json()['upload_url']
 
