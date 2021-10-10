@@ -13,6 +13,12 @@ urlpatterns = [
 
     path('connect', views.Connect.as_view(), name="connect"),
     path('room/<str:name>', views.ChatRoom.as_view(), name="room"),
+    path('like-minded-people', views.LikeMinded.as_view(), name="like_minded"),
 
-    path('messages/<str:name>', views.Messages.as_view(), name="messages"),
+    path('chat/messages/<int:pk>', views.Messages.as_view(), name="messages"),
+    path('rooms/messages/<str:name>', views.RoomMessages.as_view(), name="room_messages"),
+
+    path('get-insights', views.Audio.as_view(), name="audio"),
+    path('get-heard/<str:topic>', views.People.as_view(), name="get_heard"),
+    path('binary_chat/<int:pk>', views.BinaryChat.as_view(), name="binary_chat"),
 ]

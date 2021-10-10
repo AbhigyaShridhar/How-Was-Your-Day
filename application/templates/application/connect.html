@@ -15,5 +15,9 @@
     {% for room in rooms %}
       <li><a href="{% url 'application:room' room.theme.name %}"> {{ room.theme.name }} </a></li>
     {% endfor %}
+
+    {% for r in themes %}
+      <li><a href="{% url 'application:get_heard' r.theme.name %}"> {{ r.theme.name }} </a></li>
+    {% endfor %}
   </ul>
 {% endblock %}

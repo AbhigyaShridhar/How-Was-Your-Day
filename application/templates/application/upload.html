@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block title %}
+  Upload Audio from your computer
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid mb-4">
+      <div class="container">
+          <div class="row flex-lg-row-reverse flex-md-row-reverse justify-content-end align-items-center py-5">
+              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pb-5 py-3">
+                  <img src="{% static 'img/upload-gif.gif' %}" class="mx-auto shadow-lg rounded img-fluid d-none d-sm-none d-md-3-none d-lg-block d-xl-block" alt="Upload Banner Image" />
+              </div>
+
+              <div class="col-lg-8 col-md-12 col-sm-12 d-col-lg-8 d-col-md-6 d-col-sm-12 p-3">
+                  <h1 class="display-4 fw-bold lh-1 mb-3">Upload any Audio</P></h1>
+                  <p class="lead">
+                      Get Insights about an Audio Clip uploaded by you :)
+                  </p>
+                  <br/>
+                  <p>
+                      <label for="multipleFiles" class="form-label">Upload your Audio File(s)</label>
+                      <form action="index.html" method="post">
+                        {% csrf_token %}
+                        <input type="file" class="form-control form-control-lg" id="multipleFiles" accept="audio/*" multiple />
+                      </form>
+                  </p>
+
+                  <div class="d-md-flex justify-md-content-center">
+
+                      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                          <a class="btn btn-primary btn-lg me-md-2 mt-5" href="#" role="button">
+                              Get Insights about Audio
+                          </a>
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+{% endblock %}
